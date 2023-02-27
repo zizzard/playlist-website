@@ -3,7 +3,8 @@
   justify-content: flex-start;
   align-items: flex-start;
   flex-wrap: wrap;
-  padding-right: 20%;
+  padding-right: 100px;
+  padding-bottom: 20px;
 }
 
 .playlist{
@@ -19,10 +20,26 @@
   cursor: pointer;
 }
 
+.small-border{
+  border: 1px solid;
+  border-color: black;
+  width: 166px;
+  height: 166px;
+
+  /* border: 1px solid;
+  border-color: black;
+  width: 132px;
+  height: 132px; */
+}
+
 .playlist-image{
   padding: 8px;
   width: 150px;
   height: 150px;
+
+  /* padding: 6px;
+  width: 120px;
+  height: 120px; */
 }
 
 .playlist-title{
@@ -43,9 +60,25 @@
   color: black;
 }
 
-.small-border{
-  border: 1px solid;
-  border-color: black;
-  width: 166px;
-  height: 166px;
+@media only screen and (min-width: 1000px) {
+  .playlists{
+    padding-right: 20%;
+  }
+}
+
+@media only screen and (max-width: 520px) {
+  .playlists{
+    padding-right: 0;
+  }
+
+  .small-border{
+    width: 132px;
+    height: 132px; 
+  }
+  
+  .playlist-image{
+    padding: 6px;
+    width: 120px;
+    height: 120px;
+  }
 }

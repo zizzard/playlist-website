@@ -12,12 +12,6 @@ function Playlist({data, delay}) {
     return () => clearTimeout(timer);
   }, [delay]);
 
-  function goToPlaylist(){
-    console.log(data.url);
-    // window.location = data.url;
-  }
-  
-
   return (
     <>
     {

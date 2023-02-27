@@ -28,8 +28,9 @@ a:active { text-decoration: none; }
 .border{
   border: 1px solid;
   border-color: black;
-  width: 500px;
-  height: 500px;
+  width: 80vw;
+  max-width: 500px;
+  max-height: 500px;
 }
 
 .home-logo{
@@ -49,14 +50,21 @@ a:active { text-decoration: none; }
   justify-content: flex-end;
 
   /* padding-top: 2px; */
-  font-size: 12px;
 }
 
 .text-box{
+  font-size: 12px;
   position: relative;
   top: -6px;
   left: -14px;
   background: white;
   height: 16px;
   width: 185px;
+}
+
+@media only screen and (max-width: 480px) {
+  .text-box{
+    font-size: 10px;
+    width: 160px;
+  }
 }
