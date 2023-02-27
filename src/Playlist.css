@@ -5,12 +5,16 @@
   flex-wrap: wrap;
   padding-right: 100px;
   padding-bottom: 20px;
+  background-color: white;
 }
 
 .playlist{
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
+
+  width: 166px;
+  height: 166px;
 
   opacity: 0;
 
@@ -25,21 +29,12 @@
   border-color: black;
   width: 166px;
   height: 166px;
-
-  /* border: 1px solid;
-  border-color: black;
-  width: 132px;
-  height: 132px; */
 }
 
 .playlist-image{
   padding: 8px;
   width: 150px;
   height: 150px;
-
-  /* padding: 6px;
-  width: 120px;
-  height: 120px; */
 }
 
 .playlist-title{
@@ -69,6 +64,11 @@
 @media only screen and (max-width: 520px) {
   .playlists{
     padding-right: 0;
+  }
+
+  .playlist{
+    width: 132px;
+    height: 132px; 
   }
 
   .small-border{

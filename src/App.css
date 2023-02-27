@@ -23,6 +23,8 @@ a:active { text-decoration: none; }
   align-items: center;
 
   cursor: pointer;
+
+  background-color: white;
 }
 
 .border{
