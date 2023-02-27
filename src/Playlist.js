@@ -2,7 +2,7 @@ import './App.css';
 import './Playlist.css';
 import React, { useState, useEffect } from 'react';
 
-function Playlist({data, delay}) {
+function Playlist({data, delay, func, index, fadeOutStatus, currentDisplay}) {
   const [display, setDisplay] = useState(false);
 
   useEffect(() => {
@@ -12,11 +12,18 @@ function Playlist({data, delay}) {
     return () => clearTimeout(timer);
   }, [delay]);
 
+
+
+  function callFunc(){
+    func(index);
+  }
+
   return (
     <>
     {
       display ? (
-        <a className={"playlist fade-in"} href={data.url} target="_blank" rel="noreferrer">
+        <>
+        <a className={fadeOutStatus ? "playlist fade-out": "playlist fade-in"} onClick={() => callFunc()}>
           <div className="small-border">
             <img className="playlist-image" src={data.img} />
           </div>
@@ -24,8 +31,13 @@ function Playlist({data, delay}) {
             <div className="small-text-box">{data.title}</div>
           </div>
         </a>
+        {currentDisplay ? 
+          <div className="test-text fade-in">{data.title}</div> :
+          <div className="test-text"></div>
+        }
+        </>
       ) : (
-         <a className={"playlist"}></a>
+         <a className="playlist"></a>
       )
     }
     </>

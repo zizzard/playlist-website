@@ -8,8 +8,152 @@ function App() {
 
   const [click, setClick] = useState(false);
   const [launchFade, setLaunchFade] = useState(false);
+  const [launchPlaylist, setLaunchPlaylist] = useState(-1);
 
-  const FADE_IN_TIME_MS = 150;
+  const [fadeOutStatus001, setFadeOutStatus001] = useState(false);
+  const [fadeOutStatus002, setFadeOutStatus002] = useState(false);
+  const [fadeOutStatus003, setFadeOutStatus003] = useState(false);
+  const [fadeOutStatus004, setFadeOutStatus004] = useState(false);
+  const [fadeOutStatus005, setFadeOutStatus005] = useState(false);
+  const [fadeOutStatus006, setFadeOutStatus006] = useState(false);
+  const [fadeOutStatus007, setFadeOutStatus007] = useState(false);
+  const [fadeOutStatus008, setFadeOutStatus008] = useState(false);
+  const [fadeOutStatus009, setFadeOutStatus009] = useState(false);
+  const [fadeOutStatus010, setFadeOutStatus010] = useState(false);
+  const [fadeOutStatus011, setFadeOutStatus011] = useState(false);
+  const [fadeOutStatus012, setFadeOutStatus012] = useState(false);
+  const [fadeOutStatus013, setFadeOutStatus013] = useState(false);
+  const [fadeOutStatus014, setFadeOutStatus014] = useState(false);
+  const [fadeOutStatus015, setFadeOutStatus015] = useState(false);
+  const [fadeOutStatus016, setFadeOutStatus016] = useState(false);
+  const [fadeOutStatus017, setFadeOutStatus017] = useState(false);
+  const [fadeOutStatus018, setFadeOutStatus018] = useState(false);
+  const [fadeOutStatus019, setFadeOutStatus019] = useState(false);
+  const [fadeOutStatus020, setFadeOutStatus020] = useState(false);
+  const [fadeOutStatus021, setFadeOutStatus021] = useState(false);
+  const [fadeOutStatus022, setFadeOutStatus022] = useState(false);
+
+  const FADE_IN_TIME_MS = 10;
+
+  function getFadeOutStatus(index){
+    switch(index) {
+      case 1:
+        return fadeOutStatus001;
+      case 2:
+        return fadeOutStatus002;
+      case 3:
+        return fadeOutStatus003;
+      case 4:
+        return fadeOutStatus004;
+      case 5:
+        return fadeOutStatus005;
+      case 6:
+        return fadeOutStatus006;
+      case 7:
+        return fadeOutStatus007;
+      case 8:
+        return fadeOutStatus008;
+      case 9:
+        return fadeOutStatus009;
+      case 10:
+        return fadeOutStatus010;
+      case 11:
+        return fadeOutStatus011;
+      case 12:
+        return fadeOutStatus012;
+      case 13:
+        return fadeOutStatus013;
+      case 14:
+        return fadeOutStatus014;
+      case 15:
+        return fadeOutStatus015;
+      case 16:
+        return fadeOutStatus016;
+      case 17:
+        return fadeOutStatus017;
+      case 18:
+        return fadeOutStatus018;
+      case 19:
+        return fadeOutStatus019;
+      case 20:
+        return fadeOutStatus020;
+      case 21:
+        return fadeOutStatus021;
+      case 22:
+        return fadeOutStatus022;
+    }
+  }
+
+  function setFadeOutStatus(index, value){
+    switch(index) {
+      case 1:
+        setFadeOutStatus001(value);
+        break;
+      case 2:
+        setFadeOutStatus002(value);
+        break;
+      case 3:
+        setFadeOutStatus003(value);
+        break;
+      case 4:
+        setFadeOutStatus004(value);
+        break;
+      case 5:
+        setFadeOutStatus005(value);
+        break;
+      case 6:
+        setFadeOutStatus006(value);
+        break;
+      case 7:
+        setFadeOutStatus007(value);
+        break;
+      case 8:
+        setFadeOutStatus008(value);
+        break;
+      case 9:
+        setFadeOutStatus009(value);
+        break;
+      case 10:
+        setFadeOutStatus010(value);
+        break;
+      case 11:
+        setFadeOutStatus011(value);
+        break;
+      case 12:
+        setFadeOutStatus012(value);
+        break;
+      case 13:
+        setFadeOutStatus013(value);
+        break;
+      case 14:
+        setFadeOutStatus014(value);
+        break;
+      case 15:
+        setFadeOutStatus015(value);
+        break;
+      case 16:
+        setFadeOutStatus016(value);
+        break;
+      case 17:
+        setFadeOutStatus017(value);
+        break;
+      case 18:
+        setFadeOutStatus018(value);
+        break;
+      case 19:
+        setFadeOutStatus019(value);
+        break;
+      case 20:
+        setFadeOutStatus020(value);
+        break;
+      case 21:
+        setFadeOutStatus021(value);
+        break;
+      case 22:
+        setFadeOutStatus022(value);
+        break;
+    }
+  }  
 
   const playlistList = [
     {
@@ -132,6 +276,22 @@ function App() {
    }, 1000);
   }
 
+  useEffect(() => {
+    if(launchPlaylist === -2){ //close
+      for(let i = 1; i <= 22; i++){
+        if(i === launchPlaylist) continue;
+        setFadeOutStatus(i, false);
+      }
+    }else if(launchPlaylist === -1){ //startup
+      return;
+    }else{ //open
+      for(let i = 1; i <= 22; i++){ 
+        if(i === launchPlaylist) continue;
+        setFadeOutStatus(i, true);
+      }
+    }
+  }, [launchPlaylist])
+
   return (
     <>
       {
@@ -146,16 +306,30 @@ function App() {
             </div>
           </div>
         </div>
-      
       ) : (
         <div className="playlists">
           {playlistList.map((playlist, index) => {
-            return(<Playlist data={playlist} delay={index * FADE_IN_TIME_MS} key={index} />);
+            return(
+              <Playlist key={index}
+                        data={playlist} 
+                        delay={index * FADE_IN_TIME_MS} 
+                        func={
+                          index + 1 === launchPlaylist ? 
+                            () => setLaunchPlaylist(-2) :
+                            (getFadeOutStatus(index + 1) ? 
+                              () => {} :
+                              () => setLaunchPlaylist(index + 1)
+                            )
+                        } 
+                        fadeOutStatus={getFadeOutStatus(index + 1)}
+                        currentDisplay={index + 1 === launchPlaylist}
+              />
+            );
           })}
         </div>
       )
-      }
-    </>
+    }
+  </>
   );
 }
 
