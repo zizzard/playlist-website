@@ -2,7 +2,7 @@ import './App.css';
 import './Playlist.css';
 import React, { useState, useEffect } from 'react';
 
-function Playlist({data, delay, func, index, fadeOutStatus, setPlaylistData, setShowPlaylistData}) {
+function Playlist({data, delay, func, funcType, index, fadeOutStatus, setPlaylistData, setShowPlaylistData}) {
   const [display, setDisplay] = useState(false);
 
   useEffect(() => {
@@ -13,21 +13,31 @@ function Playlist({data, delay, func, index, fadeOutStatus, setPlaylistData, set
   }, [delay]);
 
   function callFunc(){
-    setPlaylistData();
-    setShowPlaylistData();
-    func(index);
+    switch(funcType) {
+      case "hidePlaylist":
+        setPlaylistData();
+        setShowPlaylistData();
+        func();
+      case "showPlaylist":
+        setPlaylistData();
+        setShowPlaylistData();
+        func();
+        break;
+      default:
+        break;
+    }
   }
 
   return (
     <>
     {
       display ? (
-          <a className={fadeOutStatus ? "playlist fade-out" : "playlist fade-in"} onClick={() => callFunc()}>
-            <div className="small-border">
-              <img className="playlist-image" src={data.img} />
-            </div>
+          <a className={fadeOutStatus ? "playlist fade-out" : "playlist playlist-fade-in"} onClick={() => callFunc()}>
             <div className="playlist-title">
               <div className="small-text-box">{data.title}</div>
+            </div>
+            <div className="small-border">
+              <img className="playlist-image" src={data.img} />
             </div>
           </a>
       ) : (

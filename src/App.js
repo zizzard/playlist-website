@@ -2,6 +2,7 @@ import './App.css';
 import home from "./home.gif";
 import Playlist from "./Playlist";
 import ImageData from './ImageData';
+import PlaylistData from './PlaylistData';
 import { useEffect, useState } from 'react';
 
 function App() {
@@ -11,6 +12,7 @@ function App() {
   const [launchPlaylist, setLaunchPlaylist] = useState(-1);
   const [showPlaylistData, setShowPlaylistData] = useState(false);
   const [playlistData, setPlaylistData] = useState(null);
+  const [playlistTracks, setPlaylistTracks] = useState([]);
 
   const [fadeOutStatus001, setFadeOutStatus001] = useState(false);
   const [fadeOutStatus002, setFadeOutStatus002] = useState(false);
@@ -297,6 +299,11 @@ function App() {
     }
   }, [launchPlaylist])
 
+  function setPlaylist(playlist_data, playlist_tracks){
+    setPlaylistData(playlist_data);
+    setPlaylistTracks(playlist_tracks);
+  }
+
   return (
     <>
       {
@@ -313,6 +320,25 @@ function App() {
         </div>
       ) : (
         <>
+        {playlistData !== null ? (
+              <div className={showPlaylistData ? "overlay-text fade-in" : "overlay-text fade-out"}>
+                <div className="playlist-data-title">{playlistData.title}</div>
+                <div className="playlist-tracks">
+                  {
+                    playlistTracks.map((track, index) => {
+                      return (
+                        <div className="playlist-track" key={index}>
+                          <div className="track-id">{index + 1 < 10 ? ("0" + (index + 1)) : (index + 1)}</div>
+                          <div className="track-name">{track.title} by {track.artist}</div>
+                        </div>
+                      )
+                    })
+                  }
+                </div>
+                <div className="playlist-data-link"><a className="normal-link" href={playlistData.url}>Spotify</a></div>
+              </div>
+            ) : (<></>)  
+          }
           <div className="playlists">
             {playlistList.map((playlist, index) => {
               return(
@@ -327,20 +353,21 @@ function App() {
                                 () => setLaunchPlaylist(index + 1) // function when all playlists are shown and the current is clicked
                               )
                           } 
+                          funcType={
+                            index + 1 === launchPlaylist ? 
+                            "hidePlaylist" :                       // function when only one playlist is shown and the clicked one is shown
+                            (getFadeOutStatus(index + 1) ? 
+                              "ignoreClick" :                      // function when only one playlist is shown and the clicked one is hidden
+                              "showPlaylist"                       // function when all playlists are shown and the current is clicked
+                            )
+                          }
                           fadeOutStatus={getFadeOutStatus(index + 1)}
-                          setPlaylistData={() => setPlaylistData(playlist)}
+                          setPlaylistData={() => setPlaylist(playlist, PlaylistData[index])}
                           setShowPlaylistData={() => setShowPlaylistData(!showPlaylistData)}
                 />
               );
             })}
           </div>
-          {playlistData !== null ? (
-              <div className={showPlaylistData ? "overlay-text fade-in" : "overlay-text fade-out"}>
-                <div className="playlist-data-title">{playlistData.title}</div>
-                <div className="playlist-data-link"><a className="normal-link" href={playlistData.url}>Spotify</a></div>
-              </div>
-            ) : (<></>)  
-          }
         </>
       )
     }

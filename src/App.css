@@ -14,6 +14,15 @@ a:active { text-decoration: none; }
   transition: 0.75s ease-in-out;
 }
 
+.playlist-fade-in{
+  opacity: 0.8 !important;
+  transition: 0.75s ease-in-out;
+}
+
+.playlist-fade-in:hover{
+  opacity: 1 !important;
+}
+
 .home-app {
   text-align: center;
   width: 100vw;
@@ -57,45 +66,60 @@ a:active { text-decoration: none; }
 .text-box{
   font-size: 12px;
   position: relative;
-  top: -6px;
+  top: -5px;
   left: -14px;
   background: white;
   height: 16px;
   width: 185px;
 }
 
-@media only screen and (max-width: 480px) {
-  .text-box{
-    font-size: 10px;
-    width: 160px;
-  }
-}
-
 .overlay-text{
   font-size: 60px;
   opacity: 0;
+
+  z-index: 7;
+  position: relative;
 }
 
 .playlist-data-title{
   position: fixed;
   
-  height: 500px;
-  width: 600px;
+  height: 80px;
+  width: 120px;
 
   overflow-wrap: break-word;
   pointer-events: none;
 
   top: 100px;
   left: 50px;
+
+  z-index: 7;
+}
+
+.playlist-tracks{
+  position: fixed;
+  
+  width: 80%;
+
+  overflow-wrap: break-word;
+  pointer-events: none;
+
+  top: 200px;
+  left: 80px;
+  font-size: 24px;
+}
+
+.playlist-track{
+  display: flex;
+  justify-content: flex-start;
+  padding-bottom: 5px
 }
 
 .playlist-data-link{
   position: fixed;
 
-  bottom: 0;
-  right: 45px;
-
-  height: 90px;
+  bottom: 50px;
+  right: 100px;
   width: 200px;
 }
 
@@ -103,4 +127,28 @@ a:active { text-decoration: none; }
   color: black;
   text-decoration: none;
   text-align: right;
+}
+
+.track-id {
+  text-align: right;
+  width: 30px;
+  padding-right: 20px;
+  font-weight: 400;
+}
+
+.track-name {
+  width: 100%;
+}
+
+@media only screen and (max-width: 480px) {
+  .text-box{
+    font-size: 10px;
+    width: 160px;
+  }
+
+  .playlist-tracks{
+    width: calc(80% - 40px);
+    left: 40px;
+    font-size: 16px;
+  }
 }
