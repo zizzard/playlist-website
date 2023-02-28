@@ -35,6 +35,8 @@ function Playlist({data, delay, func, funcType, index, fadeOutStatus, setPlaylis
           <a className={fadeOutStatus ? "playlist fade-out" : "playlist playlist-fade-in"} onClick={() => callFunc()}>
             <div className="playlist-title">
               <div className="small-text-box">{data.title}</div>
+              <div className="text-box-bg"></div>
+              <div className="text-box-bg-shadow"></div>
             </div>
             <img className="playlist-image" src={data.img} />
           </a>
