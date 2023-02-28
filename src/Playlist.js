@@ -36,9 +36,7 @@ function Playlist({data, delay, func, funcType, index, fadeOutStatus, setPlaylis
             <div className="playlist-title">
               <div className="small-text-box">{data.title}</div>
             </div>
-            <div className="small-border">
-              <img className="playlist-image" src={data.img} />
-            </div>
+            <img className="playlist-image" src={data.img} />
           </a>
       ) : (
          <a className={"playlist"}></a>
