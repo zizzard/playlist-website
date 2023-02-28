@@ -2,7 +2,7 @@ import './App.css';
 import './Playlist.css';
 import React, { useState, useEffect } from 'react';
 
-function Playlist({data, delay, func, index, fadeOutStatus}) {
+function Playlist({data, delay, func, index, fadeOutStatus, setPlaylistData, setShowPlaylistData}) {
   const [display, setDisplay] = useState(false);
 
   useEffect(() => {
@@ -12,10 +12,10 @@ function Playlist({data, delay, func, index, fadeOutStatus}) {
     return () => clearTimeout(timer);
   }, [delay]);
 
-
-
   function callFunc(){
-    // setPlaylistData(data);
+    console.log(data);
+    setPlaylistData();
+    setShowPlaylistData();
     func(index);
   }
 

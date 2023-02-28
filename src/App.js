@@ -9,7 +9,8 @@ function App() {
   const [click, setClick] = useState(false);
   const [launchFade, setLaunchFade] = useState(false);
   const [launchPlaylist, setLaunchPlaylist] = useState(-1);
-  // const [playlistData, setPlaylistData] = useState([{title: ""}]);
+  const [showPlaylistData, setShowPlaylistData] = useState(false);
+  const [playlistData, setPlaylistData] = useState(null);
 
   const [fadeOutStatus001, setFadeOutStatus001] = useState(false);
   const [fadeOutStatus002, setFadeOutStatus002] = useState(false);
@@ -270,7 +271,6 @@ function App() {
   ]
 
   function toHome(){
-    console.log("toHome")
     setLaunchFade(true);
     setTimeout(() => {
       setClick(true);
@@ -324,14 +324,24 @@ function App() {
                               )
                           } 
                           fadeOutStatus={getFadeOutStatus(index + 1)}
-                          // setPlaylistData={setPlaylistData()}
+                          setPlaylistData={() => setPlaylistData(playlist)}
+                          setShowPlaylistData={() => setShowPlaylistData(!showPlaylistData)}
                 />
               );
             })}
           </div>
-          {/* <div className="test-text fade-in">
-            {playlistData.title}
-          </div> */}
+          {playlistData !== null ? (
+            showPlaylistData ? (
+              <div className="test-text fade-in">
+                {playlistData.title}
+              </div>
+            ) : (
+              <div className="test-text fade-out">
+                {playlistData.title}
+              </div>
+            )
+            ) : (<></>)  
+          }
         </>
       )
     }
