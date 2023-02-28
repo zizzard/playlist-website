@@ -83,6 +83,8 @@ function App() {
         return fadeOutStatus021;
       case 22:
         return fadeOutStatus022;
+      default: 
+        return fadeOutStatus001;
     }
   }
 
@@ -153,6 +155,8 @@ function App() {
         break;
       case 22:
         setFadeOutStatus022(value);
+        break;
+      default:
         break;
     }
   }  
@@ -331,15 +335,10 @@ function App() {
             })}
           </div>
           {playlistData !== null ? (
-            showPlaylistData ? (
-              <div className="test-text fade-in">
-                {playlistData.title}
+              <div className={showPlaylistData ? "overlay-text fade-in" : "overlay-text fade-out"}>
+                <div className="playlist-data-title">{playlistData.title}</div>
+                <div className="playlist-data-link"><a className="normal-link" href={playlistData.url}>Spotify</a></div>
               </div>
-            ) : (
-              <div className="test-text fade-out">
-                {playlistData.title}
-              </div>
-            )
             ) : (<></>)  
           }
         </>

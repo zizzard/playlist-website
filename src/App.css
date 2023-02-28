@@ -70,3 +70,37 @@ a:active { text-decoration: none; }
     width: 160px;
   }
 }
+
+.overlay-text{
+  font-size: 60px;
+  opacity: 0;
+}
+
+.playlist-data-title{
+  position: fixed;
+  
+  height: 500px;
+  width: 600px;
+
+  overflow-wrap: break-word;
+  pointer-events: none;
+
+  top: 100px;
+  left: 50px;
+}
+
+.playlist-data-link{
+  position: fixed;
+
+  bottom: 0;
+  right: 45px;
+
+  height: 90px;
+  width: 200px;
+}
+
+.normal-link{
+  color: black;
+  text-decoration: none;
+  text-align: right;
+}
