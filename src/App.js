@@ -9,6 +9,7 @@ function App() {
   const [click, setClick] = useState(false);
   const [launchFade, setLaunchFade] = useState(false);
   const [launchPlaylist, setLaunchPlaylist] = useState(-1);
+  // const [playlistData, setPlaylistData] = useState([{title: ""}]);
 
   const [fadeOutStatus001, setFadeOutStatus001] = useState(false);
   const [fadeOutStatus002, setFadeOutStatus002] = useState(false);
@@ -33,7 +34,7 @@ function App() {
   const [fadeOutStatus021, setFadeOutStatus021] = useState(false);
   const [fadeOutStatus022, setFadeOutStatus022] = useState(false);
 
-  const FADE_IN_TIME_MS = 10;
+  const FADE_IN_TIME_MS = 125;
 
   function getFadeOutStatus(index){
     switch(index) {
@@ -307,26 +308,31 @@ function App() {
           </div>
         </div>
       ) : (
-        <div className="playlists">
-          {playlistList.map((playlist, index) => {
-            return(
-              <Playlist key={index}
-                        data={playlist} 
-                        delay={index * FADE_IN_TIME_MS} 
-                        func={
-                          index + 1 === launchPlaylist ? 
-                            () => setLaunchPlaylist(-2) :
-                            (getFadeOutStatus(index + 1) ? 
-                              () => {} :
-                              () => setLaunchPlaylist(index + 1)
-                            )
-                        } 
-                        fadeOutStatus={getFadeOutStatus(index + 1)}
-                        currentDisplay={index + 1 === launchPlaylist}
-              />
-            );
-          })}
-        </div>
+        <>
+          <div className="playlists">
+            {playlistList.map((playlist, index) => {
+              return(
+                <Playlist key={index}
+                          data={playlist} 
+                          delay={index * FADE_IN_TIME_MS} 
+                          func={
+                            index + 1 === launchPlaylist ? 
+                              () => setLaunchPlaylist(-2) :        // function when only one playlist is shown and the clicked one is shown
+                              (getFadeOutStatus(index + 1) ? 
+                                () => {} :                         // function when only one playlist is shown and the clicked one is hidden
+                                () => setLaunchPlaylist(index + 1) // function when all playlists are shown and the current is clicked
+                              )
+                          } 
+                          fadeOutStatus={getFadeOutStatus(index + 1)}
+                          // setPlaylistData={setPlaylistData()}
+                />
+              );
+            })}
+          </div>
+          {/* <div className="test-text fade-in">
+            {playlistData.title}
+          </div> */}
+        </>
       )
     }
   </>
