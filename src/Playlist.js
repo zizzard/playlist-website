@@ -27,7 +27,6 @@ function Playlist({
 
     if (hover) {
       const timer = setTimeout(() => {
-        console.log("hover");
         showHoverImage(hover);
       }, DURATION_MS);
       return () => clearTimeout(timer);
@@ -42,6 +41,7 @@ function Playlist({
         setPlaylistData();
         setShowPlaylistData();
         func();
+        break;
       case "showPlaylist":
         setPlaylistData();
         setShowPlaylistData();
@@ -70,11 +70,12 @@ function Playlist({
                   hover ? "playlist-image-top-hover" : "playlist-image-top"
                 }
                 src={data.img}
+                alt=""
               />
             ) : (
               <></>
             )}
-            <img className="playlist-image" src={data.img} />
+            <img className="playlist-image" src={data.img} alt="" />
             <div className="playlist-title">
               <div className="small-text-box">{data.title}</div>
               <div className="text-box-bg"></div>
