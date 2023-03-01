@@ -1,12 +1,11 @@
-import './App.css';
+import "./App.css";
 import home from "./home.gif";
 import Playlist from "./Playlist";
-import ImageData from './ImageData';
-import PlaylistData from './PlaylistData';
-import { useEffect, useState } from 'react';
+import ImageData from "./ImageData";
+import PlaylistData from "./PlaylistData";
+import { useEffect, useState } from "react";
 
 function App() {
-
   const [click, setClick] = useState(false);
   const [launchFade, setLaunchFade] = useState(false);
   const [launchPlaylist, setLaunchPlaylist] = useState(-1);
@@ -39,8 +38,8 @@ function App() {
 
   const FADE_IN_TIME_MS = 125;
 
-  function getFadeOutStatus(index){
-    switch(index) {
+  function getFadeOutStatus(index) {
+    switch (index) {
       case 1:
         return fadeOutStatus001;
       case 2:
@@ -85,13 +84,13 @@ function App() {
         return fadeOutStatus021;
       case 22:
         return fadeOutStatus022;
-      default: 
+      default:
         return fadeOutStatus001;
     }
   }
 
-  function setFadeOutStatus(index, value){
-    switch(index) {
+  function setFadeOutStatus(index, value) {
+    switch (index) {
       case 1:
         setFadeOutStatus001(value);
         break;
@@ -161,7 +160,7 @@ function App() {
       default:
         break;
     }
-  }  
+  }
 
   const playlistList = [
     {
@@ -274,41 +273,46 @@ function App() {
       title: "022",
       url: "https://open.spotify.com/playlist/7LHwyHwtQd7YbHuj0RXh7w?si=7594dfbf3f8c4a92",
     },
-  ]
+  ];
 
-  function toHome(){
+  function toHome() {
     setLaunchFade(true);
     setTimeout(() => {
       setClick(true);
-   }, 1000);
+    }, 1000);
   }
 
   useEffect(() => {
-    if(launchPlaylist === -2){ //close
-      for(let i = 1; i <= 22; i++){
-        if(i === launchPlaylist) continue;
+    if (launchPlaylist === -2) {
+      //close
+      for (let i = 1; i <= 22; i++) {
+        if (i === launchPlaylist) continue;
         setFadeOutStatus(i, false);
       }
-    }else if(launchPlaylist === -1){ //startup
+    } else if (launchPlaylist === -1) {
+      //startup
       return;
-    }else{ //open
-      for(let i = 1; i <= 22; i++){ 
-        if(i === launchPlaylist) continue;
+    } else {
+      //open
+      for (let i = 1; i <= 22; i++) {
+        if (i === launchPlaylist) continue;
         setFadeOutStatus(i, true);
       }
     }
-  }, [launchPlaylist])
+  }, [launchPlaylist]);
 
-  function setPlaylist(playlist_data, playlist_tracks){
+  function setPlaylist(playlist_data, playlist_tracks) {
     setPlaylistData(playlist_data);
     setPlaylistTracks(playlist_tracks);
   }
 
   return (
     <>
-      {
-      !click ? (
-        <div className={launchFade ? "home-app fade-out" : "home-app"} onClick={() => toHome()}>
+      {!click ? (
+        <div
+          className={launchFade ? "home-app fade-out" : "home-app"}
+          onClick={() => toHome()}
+        >
           <div className="home-container">
             <div className="border">
               <img src={home} className="home-logo" alt="home" />
@@ -320,58 +324,73 @@ function App() {
         </div>
       ) : (
         <>
-        {playlistData !== null ? (
-              <div className={showPlaylistData ? "overlay-text fade-in" : "overlay-text fade-out"}>
-                <div className="playlist-data-title">{playlistData.title}</div>
-                <div className="playlist-tracks">
-                  {
-                    playlistTracks.map((track, index) => {
-                      return (
-                        <div className="playlist-track" key={index}>
-                          <div className="track-id">{index + 1 < 10 ? ("0" + (index + 1)) : (index + 1)}</div>
-                          <div className="track-name">{track.title} by {track.artist}</div>
-                        </div>
-                      )
-                    })
-                  }
-                </div>
-                <div className="playlist-data-link"><a className="normal-link" href={playlistData.url}>Spotify</a></div>
+          {playlistData !== null ? (
+            <div
+              className={
+                showPlaylistData
+                  ? "overlay-text fade-in"
+                  : "overlay-text fade-out"
+              }
+            >
+              <div className="playlist-data-title">{playlistData.title}</div>
+              <div className="playlist-tracks">
+                {playlistTracks.map((track, index) => {
+                  return (
+                    <div className="playlist-track" key={index}>
+                      <div className="track-id">
+                        {index + 1 < 10 ? "0" + (index + 1) : index + 1}
+                      </div>
+                      <div className="track-name">
+                        {track.title} by {track.artist}
+                      </div>
+                    </div>
+                  );
+                })}
               </div>
-            ) : (<></>)  
-          }
+              <div className="playlist-data-link">
+                <a className="normal-link" href={playlistData.url}>
+                  Spotify
+                </a>
+              </div>
+            </div>
+          ) : (
+            <></>
+          )}
           <div className="playlists">
             {playlistList.map((playlist, index) => {
-              return(
-                <Playlist key={index}
-                          data={playlist} 
-                          delay={index * FADE_IN_TIME_MS} 
-                          func={
-                            index + 1 === launchPlaylist ? 
-                              () => setLaunchPlaylist(-2) :        // function when only one playlist is shown and the clicked one is shown
-                              (getFadeOutStatus(index + 1) ? 
-                                () => {} :                         // function when only one playlist is shown and the clicked one is hidden
-                                () => setLaunchPlaylist(index + 1) // function when all playlists are shown and the current is clicked
-                              )
-                          } 
-                          funcType={
-                            index + 1 === launchPlaylist ? 
-                            "hidePlaylist" :                       // function when only one playlist is shown and the clicked one is shown
-                            (getFadeOutStatus(index + 1) ? 
-                              "ignoreClick" :                      // function when only one playlist is shown and the clicked one is hidden
-                              "showPlaylist"                       // function when all playlists are shown and the current is clicked
-                            )
-                          }
-                          fadeOutStatus={getFadeOutStatus(index + 1)}
-                          setPlaylistData={() => setPlaylist(playlist, PlaylistData[index])}
-                          setShowPlaylistData={() => setShowPlaylistData(!showPlaylistData)}
+              return (
+                <Playlist
+                  key={index}
+                  data={playlist}
+                  delay={index * FADE_IN_TIME_MS}
+                  func={
+                    index + 1 === launchPlaylist
+                      ? () => setLaunchPlaylist(-2) // function when only one playlist is shown and the clicked one is shown
+                      : getFadeOutStatus(index + 1)
+                      ? () => {} // function when only one playlist is shown and the clicked one is hidden
+                      : () => setLaunchPlaylist(index + 1) // function when all playlists are shown and the current is clicked
+                  }
+                  funcType={
+                    index + 1 === launchPlaylist
+                      ? "hidePlaylist" // function when only one playlist is shown and the clicked one is shown
+                      : getFadeOutStatus(index + 1)
+                      ? "ignoreClick" // function when only one playlist is shown and the clicked one is hidden
+                      : "showPlaylist" // function when all playlists are shown and the current is clicked
+                  }
+                  fadeOutStatus={getFadeOutStatus(index + 1)}
+                  setPlaylistData={() =>
+                    setPlaylist(playlist, PlaylistData[index])
+                  }
+                  setShowPlaylistData={() =>
+                    setShowPlaylistData(!showPlaylistData)
+                  }
                 />
               );
             })}
           </div>
         </>
-      )
-    }
-  </>
+      )}
+    </>
   );
 }
 

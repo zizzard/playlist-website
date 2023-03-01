@@ -9,6 +9,8 @@ body{
   -moz-user-select: none;
   -o-user-select: none;
   user-select: none;
+
+  background: #fffcfa;
 }
 
 .fade-out{
@@ -41,7 +43,7 @@ body{
 
   cursor: pointer;
 
-  background-color: white;
+  background-color: #fffcfa;
 }
 
 .border{
@@ -76,7 +78,7 @@ body{
   position: relative;
   top: -5px;
   left: -14px;
-  background: white;
+  background: #fffcfa;
   height: 16px;
   width: 185px;
 }
@@ -85,7 +87,7 @@ body{
   font-size: 60px;
   opacity: 0;
 
-  z-index: 7;
+  z-index: 10;
   position: relative;
 }
 
@@ -120,7 +122,9 @@ body{
 .playlist-track{
   display: flex;
   justify-content: flex-start;
-  padding-bottom: 5px
+  padding-bottom: 5px;
+
+  text-transform: lowercase;
 }
 
 .playlist-data-link{

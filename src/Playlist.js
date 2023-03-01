@@ -1,9 +1,19 @@
-import './App.css';
-import './Playlist.css';
-import React, { useState, useEffect } from 'react';
+import "./App.css";
+import "./Playlist.css";
+import React, { useState, useEffect } from "react";
 
-function Playlist({data, delay, func, funcType, index, fadeOutStatus, setPlaylistData, setShowPlaylistData}) {
+function Playlist({
+  data,
+  delay,
+  func,
+  funcType,
+  fadeOutStatus,
+  setPlaylistData,
+  setShowPlaylistData,
+}) {
   const [display, setDisplay] = useState(false);
+  const [hover, setHover] = useState(false);
+  const [hoverImage, showHoverImage] = useState(false);
 
   useEffect(() => {
     const timer = setTimeout(() => {
@@ -12,8 +22,22 @@ function Playlist({data, delay, func, funcType, index, fadeOutStatus, setPlaylis
     return () => clearTimeout(timer);
   }, [delay]);
 
-  function callFunc(){
-    switch(funcType) {
+  useEffect(() => {
+    const DURATION_MS = 500;
+
+    if (hover) {
+      const timer = setTimeout(() => {
+        console.log("hover");
+        showHoverImage(hover);
+      }, DURATION_MS);
+      return () => clearTimeout(timer);
+    } else {
+      showHoverImage(hover);
+    }
+  }, [hover]);
+
+  function callFunc() {
+    switch (funcType) {
       case "hidePlaylist":
         setPlaylistData();
         setShowPlaylistData();
@@ -30,20 +54,36 @@ function Playlist({data, delay, func, funcType, index, fadeOutStatus, setPlaylis
 
   return (
     <>
-    {
-      display ? (
-          <a className={fadeOutStatus ? "playlist fade-out" : "playlist playlist-fade-in"} onClick={() => callFunc()}>
+      {display ? (
+        <a
+          className={
+            fadeOutStatus ? "playlist fade-out" : "playlist playlist-fade-in"
+          }
+          onClick={() => callFunc()}
+          onMouseEnter={() => setHover(true)}
+          onMouseLeave={() => setHover(false)}
+        >
+          <div className="playlist-container">
+            {hoverImage ? (
+              <img
+                className={
+                  hover ? "playlist-image-top-hover" : "playlist-image-top"
+                }
+                src={data.img}
+              />
+            ) : (
+              <></>
+            )}
+            <img className="playlist-image" src={data.img} />
             <div className="playlist-title">
               <div className="small-text-box">{data.title}</div>
               <div className="text-box-bg"></div>
-              <div className="text-box-bg-shadow"></div>
             </div>
-            <img className="playlist-image" src={data.img} />
-          </a>
+          </div>
+        </a>
       ) : (
-         <a className={"playlist"}></a>
-      )
-    }
+        <a className={"playlist"}></a>
+      )}
     </>
   );
 }
