@@ -19,12 +19,29 @@ import playlist018 from "./playlists/018.js";
 import playlist019 from "./playlists/019.js";
 import playlist020 from "./playlists/020.js";
 import playlist021 from "./playlists/021.js";
-import playlist022 from "./playlists/022.js";
 
-const PlaylistData = [playlist001, playlist002, playlist003, playlist004, playlist005,
-                      playlist006, playlist007, playlist008, playlist009, playlist010,
-                      playlist011, playlist012, playlist013, playlist014, playlist015,
-                      playlist016, playlist017, playlist018, playlist019, playlist020,
-                      playlist021, playlist022]
+const PlaylistData = [
+  playlist001,
+  playlist002,
+  playlist003,
+  playlist004,
+  playlist005,
+  playlist006,
+  playlist007,
+  playlist008,
+  playlist009,
+  playlist010,
+  playlist011,
+  playlist012,
+  playlist013,
+  playlist014,
+  playlist015,
+  playlist016,
+  playlist017,
+  playlist018,
+  playlist019,
+  playlist020,
+  playlist021,
+];
 
 export default PlaylistData;

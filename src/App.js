@@ -34,7 +34,6 @@ function App() {
   const [fadeOutStatus019, setFadeOutStatus019] = useState(false);
   const [fadeOutStatus020, setFadeOutStatus020] = useState(false);
   const [fadeOutStatus021, setFadeOutStatus021] = useState(false);
-  const [fadeOutStatus022, setFadeOutStatus022] = useState(false);
 
   const FADE_IN_TIME_MS = 125;
 
@@ -82,8 +81,6 @@ function App() {
         return fadeOutStatus020;
       case 21:
         return fadeOutStatus021;
-      case 22:
-        return fadeOutStatus022;
       default:
         return fadeOutStatus001;
     }
@@ -153,9 +150,6 @@ function App() {
         break;
       case 21:
         setFadeOutStatus021(value);
-        break;
-      case 22:
-        setFadeOutStatus022(value);
         break;
       default:
         break;
@@ -289,12 +283,6 @@ function App() {
       url: "https://open.spotify.com/playlist/7phqJdPTRRh0eQ7JCfTu1c?si=b971bcf3c2664d22",
       am_url: "https://music.apple.com/us/playlist/021/pl.u-LdbqEpdt2abWkKy",
     },
-    {
-      img: ImageData[21],
-      title: "022",
-      url: "https://open.spotify.com/playlist/7LHwyHwtQd7YbHuj0RXh7w?si=7594dfbf3f8c4a92",
-      am_url: "https://music.apple.com/us/playlist/021/pl.u-LdbqEpdt2abWkKy",
-    },
   ];
 
   function toHome() {
@@ -383,7 +371,8 @@ function App() {
                 >
                   Spotify
                 </a>
-                {/* {<div className="spacing-link"></div>
+                {"  //  "}
+
                 <a
                   className="normal-link"
                   href={playlistData.am_url}
@@ -391,7 +380,9 @@ function App() {
                   rel="noreferrer"
                 >
                   Apple Music
-                </a>} */}
+                </a>
+                {/* {<div className="spacing-link"></div>
+               } */}
               </div>
             </div>
           ) : (

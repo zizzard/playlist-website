@@ -19,12 +19,29 @@ import img018 from "./images/018.png";
 import img019 from "./images/019.png";
 import img020 from "./images/020.png";
 import img021 from "./images/021.png";
-import img022 from "./images/022.png";
 
-const ImageData = [img001, img002, img003, img004, img005,
-                   img006, img007, img008, img009, img010,
-                   img011, img012, img013, img014, img015,
-                   img016, img017, img018, img019, img020,
-                   img021, img022]
+const ImageData = [
+  img001,
+  img002,
+  img003,
+  img004,
+  img005,
+  img006,
+  img007,
+  img008,
+  img009,
+  img010,
+  img011,
+  img012,
+  img013,
+  img014,
+  img015,
+  img016,
+  img017,
+  img018,
+  img019,
+  img020,
+  img021,
+];
 
 export default ImageData;
